@@ -11,8 +11,7 @@ class DepoolElectionSettings(ElectionSettings):
     TON_CONTROL_ELECTION_MODE = ElectionMode.DEPOOL
     DEPOOL_LIST = [
         DePoolSettings(depool_address="",
-                       proxy_addresses=["",
-                                        ""],
+                       abi_url="https://raw.githubusercontent.com/tonlabs/ton-labs-contracts/DePool_2021_02_01/solidity/depool/DePool.abi.json",
                        prudent_election_settings=PrudentElectionSettings(election_end_join_offset=3000,
                                                                          join_threshold=1),
                        replenish_settings=AutoReplenishSettings(TonCoin(2.5), max_period=7200)
@@ -21,17 +20,20 @@ class DepoolElectionSettings(ElectionSettings):
 
 
 class NodeSettings(TonSettings):
-    DOCKER_HOST = None  # None for local, or "ssh://root@<ip>" for remote server
+    # None for local, or "ssh://root@<ip>" for remote server
+    DOCKER_HOST = None
 
     TON_ENV = "rustnet.ton.dev"
-    TON_WORK_DIR = "path to work-dir on host machine" # ex "/mnt/ton/validator"
-    TON_CONTROL_WORK_DIR = "path to work-dir on hostmachine" # ex "/mnt/ton/control"
+    # ex "/mnt/ton/validator", don't forget to chmod 1001:1001 <path> on host
+    TON_WORK_DIR = "path to work-dir on host machine"
+    # ex "/mnt/ton/control", don't forget to chmod 1002:1002 <path> on host
+    TON_CONTROL_WORK_DIR = "path to work-dir on hostmachine"
     TON_CONTROL_SECRET_MANAGER_CONNECTION_STRING = {
-        "encryption_key_name": "example_key.priv", # ex private key name under keys/ folder to use
-        "validator_seed": '', # see https://github.com/jarig/suton#seed-encryption
-        "validator_address": "", # ex 0:210e0f46cb458760d1798e1d005fe580913d59b34a1684f19f461622a880758a
+        "encryption_key_name": "example_key.priv",  # ex private key name under keys/ folder to use
+        "validator_seed": '',  # see https://github.com/jarig/suton#seed-encryption
+        "validator_address": "",  # ex 0:210e0f46cb458760d1798e1d005fe580913d59b34a1684f19f461622a880758a
         "custodian_seeds": [
-            "" # encrypted in the same way as validator_seed 
+            ""  # encrypted in the same way as validator_seed
         ],
         "secrets": {
         }
