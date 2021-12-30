@@ -1,2 +1,2 @@
-git+git://github.com/jarig/suton@rustnet/validation#egg=suton
+git+git://github.com/jarig/suton@master#egg=suton
 
